@@ -259,9 +259,9 @@ class SGnexCleaning(object):
         processed_1[['n_6A','n_6C','n_6G','n_6T']] = pd.DataFrame(processed_1['nucleotide_6'].tolist())
         processed_1[['n_7A','n_7C','n_7G','n_7T']] = pd.DataFrame(processed_1['nucleotide_7'].tolist())
 
-        processed_2[['new_dwell_0', 'new_stdv_0', 'new_mean_0', 'new_dwell_1', 'new_stdv_1', 'new_mean_1', 'new_dwell_2', 'new_stdv_2', 'new_mean_2']] = processed_1[['dwell_0', 'stdv_0', 'mean_0', 'dwell_1', 'stdv_1', 'mean_1', 'dwell_2', 'stdv_2', 'mean_2']].applymap(calculate_mean)
-        processed_2['new_nucleotides'] = processed_2['nucleotides'].apply(onehote)
-        processed_2[["nucleotide_1","nucleotide_2","nucleotide_3","nucleotide_4","nucleotide_5","nucleotide_6","nucleotide_7"]] = processed_2.apply(lambda x: split_nucleo(x['new_nucleotides']), axis = 1, result_type = 'expand')
+        processed_2[['new_dwell_0', 'new_stdv_0', 'new_mean_0', 'new_dwell_1', 'new_stdv_1', 'new_mean_1', 'new_dwell_2', 'new_stdv_2', 'new_mean_2']] = processed_1[['dwell_0', 'stdv_0', 'mean_0', 'dwell_1', 'stdv_1', 'mean_1', 'dwell_2', 'stdv_2', 'mean_2']].applymap(self.calculate_mean)
+        processed_2['new_nucleotides'] = processed_2['nucleotides'].apply(self.onehote)
+        processed_2[["nucleotide_1","nucleotide_2","nucleotide_3","nucleotide_4","nucleotide_5","nucleotide_6","nucleotide_7"]] = processed_2.apply(lambda x: self.split_nucleo(x['new_nucleotides']), axis = 1, result_type = 'expand')
         processed_2[['n_1A','n_1C','n_1G','n_1T']] = pd.DataFrame(processed_2['nucleotide_1'].tolist())
         processed_2[['n_2A','n_2C','n_2G','n_2T']] = pd.DataFrame(processed_2['nucleotide_2'].tolist())
         processed_2[['n_3A','n_3C','n_3G','n_3T']] = pd.DataFrame(processed_2['nucleotide_3'].tolist())
