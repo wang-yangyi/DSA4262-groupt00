@@ -1,0 +1,9 @@
+pandas
+numpy
+sklearn
+statistics
+xgboost
+seaborn
+joblib
+pickle-mixin
+arviz
