@@ -1,29 +1,51 @@
-# Foobar
+# DSA4262 groupt00
 
-Foobar is a Python library for dealing with word pluralization.
+Final project on m6Anet gene sites. Our aim was to identify and predict the sites where the m6Anet modifications
 
 ## Installation
 
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install foobar.
+Use the github repository https://github.com/wang-yangyi/DSA4262-groupt00.git
+Within the ubuntu instance, run the following commands below to pull the github repo into your ubuntu instance and the required packages to run the model:
 
 ```bash
-pip install foobar
+git clone https://github.com/wang-yangyi/DSA4262-groupt00.git
+pip install -r requirements.txt
+
+aws s3 cp --no-sign-request s3://sg-nex-data/data/processed_data/m6Anet/SGNex_Hct116_directRNA_replicate4_run3/data.json workshop/data
+
+```
+
+To enter python, run the following commands below:
+
+```bash
+python3
 ```
 
 ## Usage
 
+Within python:
+
+1. To import our model and run the training of the model, run the following commands below:
+
 ```python
-import foobar
+import T00
 
-# returns 'words'
-foobar.pluralize('word')
+# '../data/data.json' is the file path to data.json train file 
+# '../data/data.info' is the file path to data.info train file 
+T00.T00_model().train_model('../data/data.json', '../data/data.info')
 
-# returns 'geese'
-foobar.pluralize('goose')
-
-# returns 'phenomenon'
-foobar.singularize('phenomena')
 ```
+
+2. To import our model and test our model against the SGnex data, run the following commands below:
+
+```python
+import T00
+
+# '../workshop/data.json' is the file path to SGnex data you pulled from the S3
+T00.T00_model().test_SGnex_data('../workshop/data/data.json')
+
+```
+
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
@@ -31,4 +53,4 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 Please make sure to update tests as appropriate.
 
 ## License
-[MIT](https://choosealicense.com/licenses/mit/)
+[T00]
