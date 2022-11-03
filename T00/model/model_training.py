@@ -47,7 +47,7 @@ class ModelTraining(object):
 
         print("teting model")
         print("\n")
-        model = load('../T00/T00_model.joblib') 
+        model = load('T00/T00_model.joblib') 
 
         data_y_pred_score_1 = model.predict_proba(data_x_1)
         score_df_1 = pd.DataFrame(data_y_pred_score_1)
