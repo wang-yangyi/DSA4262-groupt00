@@ -18,6 +18,7 @@ import arviz as az
 from .data_cleaning import DataCleaning
 from .data_splitting import DataSplitting
 from .model_training import ModelTraining
+from .data_cleaning import SGnexCleaning
 
 random_seed=42
 np.random.seed(random_seed)
@@ -28,18 +29,23 @@ class T00_model(object):
 
     print('Model Invoked')
 
-    def __init__(self, 
-                 raw_json,
-                 data_info, 
-                 random_seed=42):
-
+    def __init__(self,random_seed=42):
+        self.raw_data = []
+        
+    def train_model(self, raw_json, data_info):
         self.raw_json = raw_json
         self.data_info = data_info
-        
-    def worker(self):
         cleaning_data = DataCleaning(self.raw_json, self.data_info).data_cleaner()
         print("cleaning done")
         xtest, xtrain, ytest, ytrain  = DataSplitting(cleaning_data).worker()
         print("splitting done")
-        return ModelTraining(xtest, xtrain, ytest, ytrain).worker()
+        return ModelTraining().worker(xtest, xtrain, ytest, ytrain)
+
+    def test_SGnex_data(self, SGnex_data):
+        self.SGnex_data = SGnex_data
+        print("data imported")
+        data_x_1, data_x_2, processed = SGnexCleaning(self.SGnex_data).data_cleaner()
+        print("data cleaned")
+        return ModelTraining().SGnex_tester(data_x_1, data_x_2, processed)
+
 
