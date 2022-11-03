@@ -15,13 +15,15 @@ aws s3 cp --no-sign-request s3://sg-nex-data/data/processed_data/m6Anet/SGNex_Hc
 
 ```
 
-## Usage
-
 To enter python, run the following commands below:
 
 ```bash
 python3
 ```
+
+## Usage
+
+Within python:
 
 1. To import our model and run the training of the model, run the following commands below:
 
