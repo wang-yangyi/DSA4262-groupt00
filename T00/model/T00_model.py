@@ -14,6 +14,7 @@ import time
 from datetime import date
 import seaborn as sns
 import arviz as az
+import warnings
 
 from .data_cleaning import DataCleaning
 from .data_splitting import DataSplitting
@@ -42,6 +43,7 @@ class T00_model(object):
         return ModelTraining().worker(xtest, xtrain, ytest, ytrain)
 
     def test_SGnex_data(self, SGnex_data):
+        warnings.filterwarnings('ignore')
         self.SGnex_data = SGnex_data
         print("data imported")
         data_x_1, data_x_2, processed = SGnexCleaning(self.SGnex_data).data_cleaner()
