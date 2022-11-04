@@ -12,6 +12,7 @@ from sklearn.metrics import accuracy_score, classification_report, confusion_mat
 import seaborn as sns
 from joblib import dump, load
 import pickle
+import os
 
 class ModelTraining(object):
 
@@ -44,11 +45,10 @@ class ModelTraining(object):
         return "Model trained, written by: group T00"
 
     def SGnex_tester(self, data_x_1, data_x_2,processed):
-
-        print("teting model")
-        print("\n")
-        model = load('T00/T00_model.joblib') 
-
+        directory = os.path.join('T00_model.joblib')
+        print("Testing model")
+        model = load(directory) 
+        print("Predicting scores")
         data_y_pred_score_1 = model.predict_proba(data_x_1)
         score_df_1 = pd.DataFrame(data_y_pred_score_1)
         data_y_pred_score_2 = model.predict_proba(data_x_2)
@@ -59,5 +59,6 @@ class ModelTraining(object):
         predicted_df = pd.concat([processed, score_df], axis = 1)
         predicted_df = predicted_df[['transcript_id', 'position_id', 1]]
         predicted_df.columns = ['transcript_id', 'transcript_position', 'score']
-
-        predicted_df.to_csv("/Users/nigel/Desktop/SCHOOLWORK/Y4S1/DSA4262/dataset/Predicted/groupt00_dataset2_1.csv", index = False)
+        print("\n")
+        print("Scores generated")
+        predicted_df.to_csv("groupt00_dataset2_1.csv", index = False)
