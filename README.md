@@ -10,6 +10,7 @@ Within the ubuntu instance, run the following commands below to pull the github 
 ```bash
 git clone https://github.com/wang-yangyi/DSA4262-groupt00.git
 sudo apt install python3-pip
+mkdir workshop/data
 
 aws s3 cp --no-sign-request s3://sg-nex-data/data/processed_data/m6Anet/SGNex_Hct116_directRNA_replicate4_run3/data.json workshop/data
 
