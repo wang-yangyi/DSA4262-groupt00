@@ -1,6 +1,6 @@
 # DSA4262 groupt00
 
-Final project on m6Anet gene sites. Our aim was to identify and predict the sites where the m6Anet modifications
+Final project for DSA4262. We aimed to develop a method to first identify RNA modifications to train the model accounting for any inaccuracies followed by a prediction model to determine m6a sites in direct RNA sequencing samples.
 
 ## Installation
 
