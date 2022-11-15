@@ -47,7 +47,7 @@ class ModelTraining(object):
     def SGnex_tester(self, data_x_1, data_x_2, processed):
         directory = str(os.getcwd())+ '/T00/model/T00_model.joblib'
         print('Testing model')
-
+        print(directory)
         xgb_model_loaded = pickle.load(open(directory, "rb"))
         print("Predicting scores")
         data_y_pred_score_1 = xgb_model_loaded.predict_proba(data_x_1)
