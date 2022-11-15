@@ -98,11 +98,6 @@ class DataCleaning(object):
         print("Dataset imported")
         return df
 
-    def import_info(self):
-        print("Importing info data")
-        labels = pd.read_csv(self.data_info, sep = ',', header=0)
-        print("Info imported")
-        return labels
 
     def data_cleaner(self):
         print('Data Cleaning in progress...')
@@ -224,6 +219,14 @@ class SGnexCleaning(object):
         f = x[5]
         g = x[6]
         return a,b,c,d,e,f,g
+
+    def import_data(self):
+        print("Importing Datasets")
+        f = open(self.raw_json, "r")
+        raw = f.readlines()
+        df = pd.DataFrame(raw, columns = ['raw'])
+        print("Dataset imported")
+        return df
 
     def data_cleaner(self):
 
