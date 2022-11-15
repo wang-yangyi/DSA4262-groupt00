@@ -30,8 +30,6 @@ az.style.use("arviz-darkgrid")
 class T00_model(object):
 
     print('Model Invoked')
-    directory = str(os.getcwd())+ '/T00_model.joblib'
-    print(directory)
 
     def __init__(self,random_seed=42):
         self.raw_data = []
