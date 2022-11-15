@@ -15,6 +15,7 @@ from datetime import date
 import seaborn as sns
 import arviz as az
 import warnings
+import os
 
 from .data_cleaning import DataCleaning
 from .data_splitting import DataSplitting
@@ -29,6 +30,8 @@ az.style.use("arviz-darkgrid")
 class T00_model(object):
 
     print('Model Invoked')
+    directory = str(os.getcwd())+ '/T00_model.joblib'
+    print(directory)
 
     def __init__(self,random_seed=42):
         self.raw_data = []
