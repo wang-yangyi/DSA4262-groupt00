@@ -46,7 +46,7 @@ class ModelTraining(object):
 
     def SGnex_tester(self, data_x_1, data_x_2,processed):
         directory = str(os.getcwd())+ '/T00_model.joblib'
-        print("directory")
+        print(directory)
         print('Testing model')
         model = load(directory) 
         print("Predicting scores")
