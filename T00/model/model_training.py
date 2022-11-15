@@ -46,13 +46,13 @@ class ModelTraining(object):
 
     def SGnex_tester(self, data_x_1, data_x_2, processed):
         directory = str(os.getcwd())+ '/T00/model/T00_model.joblib'
-        print(directory)
         print('Testing model')
-        model = load(directory) 
+
+        xgb_model_loaded = pickle.load(open(directory, "rb"))
         print("Predicting scores")
-        data_y_pred_score_1 = model.predict_proba(data_x_1)
+        data_y_pred_score_1 = xgb_model_loaded.predict_proba(data_x_1)
         score_df_1 = pd.DataFrame(data_y_pred_score_1)
-        data_y_pred_score_2 = model.predict_proba(data_x_2)
+        data_y_pred_score_2 = xgb_model_loaded.predict_proba(data_x_2)
         score_df_2 = pd.DataFrame(data_y_pred_score_2)
         score_df = pd.concat([score_df_1, score_df_2], axis = 0)
         score_df = score_df.reset_index(drop = True)
@@ -63,3 +63,4 @@ class ModelTraining(object):
         print("\n")
         print("Scores generated")
         predicted_df.to_csv("groupt00_dataset2_1.csv", index = False)
+        return 'SGnex outputs saved'

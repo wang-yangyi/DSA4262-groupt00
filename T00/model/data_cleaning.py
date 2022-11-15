@@ -142,11 +142,11 @@ class DataCleaning(object):
 class SGnexCleaning(object):
 
     def __init__(self, 
-                 raw_json, 
+                 raw_json_2, 
                  random_seed=42):
 
-        self.raw_json = raw_json
-        self.imported_data = self.import_data()
+        self.raw_json_2 = raw_json_2
+        self.imported_SGnex_data = self.import_data()
 
     def extract_transcript_id(self, x):
         keys = x.keys()
@@ -222,7 +222,7 @@ class SGnexCleaning(object):
 
     def import_data(self):
         print("Importing Datasets")
-        f = open(self.raw_json, "r")
+        f = open(self.raw_json_2, "r")
         raw = f.readlines()
         df = pd.DataFrame(raw, columns = ['raw'])
         print("Dataset imported")
@@ -230,7 +230,7 @@ class SGnexCleaning(object):
 
     def data_cleaner(self):
 
-        df = self.imported_data
+        df = self.imported_SGnex_data
         df1 = pd.DataFrame(df, columns = ['raw'])
         df1['raw'] = df1.apply(lambda x: json.loads(x[0]), axis = 1)
         df1['transcript_id'] = df1.apply(lambda x: self.extract_transcript_id(x['raw']), axis = 1)
