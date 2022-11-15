@@ -225,18 +225,10 @@ class SGnexCleaning(object):
         g = x[6]
         return a,b,c,d,e,f,g
 
-    def import_data(self):
-        print("Importing Datasets")
-        f = open(self.raw_json, "r")
-        raw = f.readlines()
-        df = pd.DataFrame(raw, columns = ['raw'])
-        print("Dataset imported")
-        return df
-
     def data_cleaner(self):
-        print('Data Cleaning in progress...')
-        df1 = self.imported_data
 
+        df = self.imported_data
+        df1 = pd.DataFrame(df, columns = ['raw'])
         df1['raw'] = df1.apply(lambda x: json.loads(x[0]), axis = 1)
         df1['transcript_id'] = df1.apply(lambda x: self.extract_transcript_id(x['raw']), axis = 1)
         df1['position_id'] = df1.apply(lambda x: self.extract_transcript_position(x['transcript_id'], x['raw']), axis = 1)
@@ -248,6 +240,7 @@ class SGnexCleaning(object):
         processed_1 = processed[0:math.floor(0.5*len(processed))]
         processed_2 = processed[math.floor(0.5*len(processed)):len(processed)]
 
+        print('processing')
         processed_1[['new_dwell_0', 'new_stdv_0', 'new_mean_0', 'new_dwell_1', 'new_stdv_1', 'new_mean_1', 'new_dwell_2', 'new_stdv_2', 'new_mean_2']] = processed_1[['dwell_0', 'stdv_0', 'mean_0', 'dwell_1', 'stdv_1', 'mean_1', 'dwell_2', 'stdv_2', 'mean_2']].applymap(self.calculate_mean)
         processed_1['new_nucleotides'] = processed_1['nucleotides'].apply(self.onehote)
         processed_1[["nucleotide_1","nucleotide_2","nucleotide_3","nucleotide_4","nucleotide_5","nucleotide_6","nucleotide_7"]] = processed_1.apply(lambda x: self.split_nucleo(x['new_nucleotides']), axis = 1, result_type = 'expand')
@@ -270,6 +263,7 @@ class SGnexCleaning(object):
         processed_2[['n_6A','n_6C','n_6G','n_6T']] = pd.DataFrame(processed_2['nucleotide_6'].tolist())
         processed_2[['n_7A','n_7C','n_7G','n_7T']] = pd.DataFrame(processed_2['nucleotide_7'].tolist())
 
+        print('encoding')
         lb = LabelEncoder()
         processed_1['new_transcript_id'] = lb.fit_transform(processed_1['transcript_id'])
         processed_1[['new_median_dwell_0', 'new_median_stdv_0', 'new_median_mean_0', 'new_median_dwell_1', 'new_median_stdv_1', 'new_median_mean_1', 'new_median_dwell_2', 'new_median_stdv_2', 'new_median_mean_2']] = processed_1[['dwell_0', 'stdv_0', 'mean_0', 'dwell_1', 'stdv_1', 'mean_1', 'dwell_2', 'stdv_2', 'mean_2']].applymap(statistics.median)

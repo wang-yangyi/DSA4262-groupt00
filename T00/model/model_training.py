@@ -44,7 +44,7 @@ class ModelTraining(object):
 
         return "Model trained, written by: group T00"
 
-    def SGnex_tester(self, data_x_1, data_x_2,processed):
+    def SGnex_tester(self, data_x_1, data_x_2, processed):
         directory = str(os.getcwd())+ '/T00/model/T00_model.joblib'
         print(directory)
         print('Testing model')
