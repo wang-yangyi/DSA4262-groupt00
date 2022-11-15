@@ -45,8 +45,9 @@ class ModelTraining(object):
         return "Model trained, written by: group T00"
 
     def SGnex_tester(self, data_x_1, data_x_2,processed):
-        directory = os.path.join('T00_model.joblib')
-        print("Testing model")
+        directory = str(os.getcwd())+ '/T00_model.joblib'
+        print("directory")
+        print('Testing model')
         model = load(directory) 
         print("Predicting scores")
         data_y_pred_score_1 = model.predict_proba(data_x_1)
